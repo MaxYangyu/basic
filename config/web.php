@@ -3,8 +3,14 @@
 $params = require(__DIR__ . '/params.php');
 
 $config = [
+    'modules' => [
+        'admin' => [
+            'class' => 'app\modules\admin',
+        ],
+    ],
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
+    'defaultRoute'=>"index", //默认首页为index控制器
     'bootstrap' => ['log'],
     'components' => [
         'request' => [

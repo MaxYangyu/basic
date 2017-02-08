@@ -35,10 +35,11 @@ class HelloController extends  Controller{
       }
     */
 
+
     //Http的缓存 设置
     //Last-Modified 头使用时间戳标明页面自上次客户端缓存后是否被修改过
     //“Entity Tag”（实体标签，简称 ETag）使用一个哈希值表示页面内容。如果页面 被修改过，哈希值也会随之改变。
-    public function behaviors()
+  /*  public function behaviors()
     {
         return[ [
             'class' => 'yii\filters\HttpCache',
@@ -52,11 +53,19 @@ class HelloController extends  Controller{
                 fclose($file);
                 return $tittle;
                 //return "etagseed89";
-
             }
-
         ]];
+    }
+    */
 
+    //防御xss攻击 转码的方法
+    // Html::encode($str);内部其实调用了PHP的htmlspecialchars函数，把预定义的字符串转换成HTML实体
+    // Htmlpurifer::process($sre) 内部其实调用了lexer函数，把预定义的字符串去除
+    public  function actionTest(){
+       // \Yii::$app->response->headers->add("X-XSS-Protection"."0");//不对xss代码过滤
+        $script = \Yii::$app->request->get('script');//获取头的script
+        echo \yii\helpers\Html::encode($script);//使用Html::encode 对获取的xss代码过滤
+        echo \yii\helpers\HtmlPurifier::process($script);//使用htmlpurifer::process 去除script代码
     }
 
     public function actionIndex(){
@@ -232,8 +241,10 @@ class HelloController extends  Controller{
         // return $this->renderPartial("index");//在View中index中写beginCache endCache 方法 进行缓存
 
         //http 缓存
-        $content =file_get_contents("hw.txt");
-        return $this->renderPartial("index",["new"=>$content]);
+       /*
+       $content =file_get_contents("hw.txt");
+       return $this->renderPartial("index",["new"=>$content]);
+       */
 
 
 

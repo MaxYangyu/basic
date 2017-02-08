@@ -2,8 +2,9 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=yii',
+    'dsn' => 'mysql:host=localhost;dbname=imooc_shop',
     'username' => 'root',
     'password' => '',
     'charset' => 'utf8',
+    'tablePrefix'=>'shop_', //前缀
 ];
