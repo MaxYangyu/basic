@@ -3,11 +3,13 @@
 $params = require(__DIR__ . '/params.php');
 
 $config = [
+
     'modules' => [
         'admin' => [
             'class' => 'app\modules\admin',
         ],
     ],
+
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'defaultRoute'=>"index", //默认首页为index控制器
@@ -32,7 +34,15 @@ $config = [
             // send all mails to a file by default. You have to set
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
-            'useFileTransport' => true,
+            'useFileTransport' => false, //true 改成false 才能发送邮件
+            'transport' => [
+              'class' => 'Swift_SmtpTransport',
+              'host' => 'smtp.qq.com',    //配置邮件的服务器
+              'username' => '591282626@qq.com',
+              'password' => 'javnwfwjfrabbbgd',
+              'port' => '465',
+              'encryption' => 'ssl',
+          ],
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
