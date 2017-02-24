@@ -73,7 +73,7 @@ class User extends ActiveRecord
 
     public function getProfile()
     {
-        return $this->hasOne(Profile::className(), ['userid' => 'userid']);
+        return $this->hasOne(Profile::className(), ['userid' => 'userid']); //根据userid获取关联表peofile user表中的userid对profile中的userid
     }
 
     public function login($data)
@@ -98,7 +98,7 @@ class User extends ActiveRecord
         $this->scenario = 'regbymail';
         if ($this->load($data) && $this->validate()) {
             $mailer = Yii::$app->mailer->compose('createuser', ['userpass' => $data['User']['userpass'], 'username' => $data['User']['username']]);
-            $mailer->setFrom('imooc_shop@163.com');
+            $mailer->setFrom('591282626@qq.com');
             $mailer->setTo($data['User']['useremail']);
             $mailer->setSubject('慕课商城-新建用户');
             if ($mailer->send() && $this->reg($data, 'regbymail')) {

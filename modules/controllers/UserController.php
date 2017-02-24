@@ -12,9 +12,9 @@ class UserController extends Controller
 {
     public function actionUsers()
     {
-        $model = User::find()->joinWith('profile');
+        $model = User::find()->joinWith('profile'); //关联user和profile数据表
         $count = $model->count();
-        $pageSize = Yii::$app->params['pageSize']['user'];
+        $pageSize = Yii::$app->params['pageSize']['user']; //config配置中的params的user参数
         $pager = new Pagination(['totalCount' => $count, 'pageSize' => $pageSize]);
         $users = $model->offset($pager->offset)->limit($pager->limit)->all();
         $this->layout = "layouts1";
